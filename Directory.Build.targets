@@ -1,5 +1,10 @@
 <Project>
-
+  <PropertyGroup>  
+    <_NeedsToStrongName>$(TargetFramework.StartsWith('net'))</_NeedsToStrongName>
+	  <SignAssembly Condition="'$(SignAssembly)' == '' and '$(_NeedsToStrongName)' == 'true'" >true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)toolkit.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  
   <Choose>
     <When Condition="'$(TargetFramework)' == 'uap10.0' or '$(TargetFramework)' == 'native'">
       <!-- UAP versions for uap10.0 where TPMV isn't implied -->
